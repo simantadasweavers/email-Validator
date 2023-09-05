@@ -39,3 +39,4 @@ Route::get('/invalidmailspdf',[PDFController::class,'generatePDF']);
 Route::get('/invalidmailsxls',[ExcelController::class,'exportUsersData']);
 
 Route::post('/deleteInvalidEmail',[emailFilterController::class,'deleteInvalid']);
+Route::post('/deleteInvalidEmail_req',[emailFilterController::class,'deleteInvalidReq']);

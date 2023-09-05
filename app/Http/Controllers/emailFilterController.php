@@ -109,10 +109,27 @@ class emailFilterController extends Controller
    public function deleteInvalid(Request $request){
     //  echo "<pre>";
     //  print_r($request->all());
+    $request->validate([ 'emailid' => 'required' ]);
     $emailid = $request['emailid'];
-
-    return view('delete/singleDeleteInvalid',['emailid'=>$emailid]);
-  
+    $email = Invalidemails::where('id','=',$emailid)->get();
+    return view('delete/singleDeleteInvalid',['email'=>$email]);
     }
+
+    public function deleteInvalidReq(Request $request){
+    //  echo "<pre>";
+    //  print_r($request->all());
+    $request->validate([ 'mailid' => 'required' ]);
+    $id = $request['mailid'];
+    Invalidemails::where('id','=',$id)->delete();
+    
+
+    $visitormail = session()->get('visitormail');
+    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+    ->first()->enrollno;
+    $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    return view('invalids',['mail'=>$mails]);
+    }
+
+
 
 }
