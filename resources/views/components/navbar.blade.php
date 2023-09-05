@@ -37,7 +37,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/')}}/invalids" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>

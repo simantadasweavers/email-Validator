@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\registrationController;
 use App\Http\Controllers\emailFilterController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ExcelController;
 
 Route::get('/', function () {
     if(session('visitormail')){
@@ -32,3 +34,8 @@ Route::get('/filter',function(){
 Route::post('/emailvalidate',[emailFilterController::class,'filter'])->name('checkemail');
 
 Route::get('/validemails',[emailFilterController::class,'validemails']);
+Route::get('/invalids',[emailFilterController::class,'invalids']);
+Route::get('/invalidmailspdf',[PDFController::class,'generatePDF']);
+Route::get('/invalidmailsxls',[ExcelController::class,'exportUsersData']);
+
+Route::post('/deleteInvalidEmail',[emailFilterController::class,'deleteInvalid']);

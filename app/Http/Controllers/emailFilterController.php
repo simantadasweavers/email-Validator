@@ -60,7 +60,7 @@ class emailFilterController extends Controller
         $valid->time = date("h:i:sa");
         $valid->save();
 
-        echo "VALID EMAIL";
+        echo "<b>".$email."</b>"."<font color='green'> VALID EMAIL </font> <br>";
 
     }
     else{
@@ -73,15 +73,11 @@ class emailFilterController extends Controller
         $invalid->time = date("h:i:sa");
         $invalid->save();
 
-        echo "INVALID EMAIL";
+        echo "<b>".$email."</b>"."<font color='red'> INVALID EMAIL </font> <br>";
 
     }
-
     }
-
     }
-
-
    }
 
    public function validemails(Request $request){
@@ -99,5 +95,24 @@ class emailFilterController extends Controller
         return redirect('/');
     }
    }
+
+   public function invalids(){
+    $visitormail = session()->get('visitormail');
+    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+    ->first()->enrollno;
+
+    $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    
+    return view('invalids',['mail'=>$mails]);
+   }
+
+   public function deleteInvalid(Request $request){
+    //  echo "<pre>";
+    //  print_r($request->all());
+    $emailid = $request['emailid'];
+
+    return view('delete/singleDeleteInvalid',['emailid'=>$emailid]);
+  
+    }
 
 }

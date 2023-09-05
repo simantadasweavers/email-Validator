@@ -9,5 +9,5 @@ class Invalidemails extends Model
 {
     use HasFactory;
     protected $table="invalidemails";
-    protected $primaryKey="id	";
+    protected $primaryKey="id";
 }
