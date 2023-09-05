@@ -40,3 +40,4 @@ Route::get('/invalidmailsxls',[ExcelController::class,'exportUsersData']);
 
 Route::post('/deleteInvalidEmail',[emailFilterController::class,'deleteInvalid']);
 Route::post('/deleteInvalidEmail_req',[emailFilterController::class,'deleteInvalidReq']);
+Route::get('/deleteInvalidEmailAll',[emailFilterController::class,'deleteInvalidAll']);

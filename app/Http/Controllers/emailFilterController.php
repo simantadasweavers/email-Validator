@@ -130,6 +130,14 @@ class emailFilterController extends Controller
     return view('invalids',['mail'=>$mails]);
     }
 
-
+    public function deleteInvalidAll(){
+        Invalidemails::truncate();
+    
+    $visitormail = session()->get('visitormail');
+    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+    ->first()->enrollno;
+    $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    return view('invalids',['mail'=>$mails]);
+    }
 
 }

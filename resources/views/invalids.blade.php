@@ -71,7 +71,9 @@
     
 
       <th scope="col">
-        <button class="btn btn-danger">Trash All</button>
+      <a href="{{url('/')}}/deleteInvalidEmailAll">
+      <button class="btn btn-danger">Trash All</button>
+      </a>  
       </th>
     </tr>
   </thead>
