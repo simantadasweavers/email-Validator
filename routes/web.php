@@ -34,10 +34,13 @@ Route::get('/filter',function(){
 Route::post('/emailvalidate',[emailFilterController::class,'filter'])->name('checkemail');
 
 Route::get('/validemails',[emailFilterController::class,'validemails']);
+Route::get('/deletevalidEmailAll',[emailFilterController::class,'deletevalidAll']);
+Route::get('/validmailspdf',[PDFController::class,'validmailsGeneratePDF']);
+
 Route::get('/invalids',[emailFilterController::class,'invalids']);
 Route::get('/invalidmailspdf',[PDFController::class,'generatePDF']);
 Route::get('/invalidmailsxls',[ExcelController::class,'exportUsersData']);
-
 Route::post('/deleteInvalidEmail',[emailFilterController::class,'deleteInvalid']);
 Route::post('/deleteInvalidEmail_req',[emailFilterController::class,'deleteInvalidReq']);
 Route::get('/deleteInvalidEmailAll',[emailFilterController::class,'deleteInvalidAll']);
+

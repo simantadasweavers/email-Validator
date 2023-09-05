@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Email Validator</title>
+  <title>Valid Mails Lists</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/email.jpeg" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -44,18 +44,71 @@
       </header>
       <!--  Header End -->
 
-      <div class="container-fluid">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <table class="table">
+  <thead>
+    <tr>
+      
+    <th scope="col">
+        <a href="{{url('/')}}/validmailspdf">
+        <button class="btn btn-success">Export PDF</button>
+        </a>
+      </th>
+    
+      <th scope="col">
+        <a href="{{url('/')}}/invalidmailsxls">
+        <button class="btn btn-dark">Export XLS</button>
+        </a>
+      </th>
+    
+
+      <th scope="col">
+      <a href="{{url('/')}}/deletevalidEmailAll">
+      <button class="btn btn-danger">Trash All</button>
+      </a>  
+      </th>
+    </tr>
+  </thead>
+</table>
+
+<br>
 
 
-        <div class="row">
-                <!--  write your own code -->
-                @foreach($data as $data)
-                {{$data->id}}
-                {{$data->name}}
-                {{$data->date}}
-                @endforeach
+        <!-- invalid emails lists -->
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Enroll No</th>
+      <th scope="col">Email</th>
+      <th scope="col">Submission Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+  @foreach($mail as $mail)
+    <tr>
+      <th scope="row">{{$mail->id}}</th>
+      <td>{{$mail->name}}</td>
+      <td>{{$mail->created_at}}</td>
+      <td> <form action="{{url('/')}}/deleteInvalidEmail" method="POST"> @csrf <input type="hidden" name="emailid" value="{{$mail->id}}" required> <button class="btn btn-warning" style="color:black;" type="submit">Delete</button> </form> </td>
+    </tr>
+   @endforeach
+
+  </tbody>
+</table>
+
         </div>
-
+        <div class="col-1"></div>
+      </div>
 
 
     </div>

@@ -80,21 +80,34 @@ class emailFilterController extends Controller
     }
    }
 
+//    valid email section
+
    public function validemails(Request $request){
     if(session('visitormail')){
-
         $visitormail = session()->get('visitormail');
         $enrollno = Visitors::select('enrollno')->where('email','=',$visitormail)
             ->first()->enrollno;
-
-       $data = DB::table('validemails')->orderBy('id', 'DESC')->get();
-
-        return view('valid',['data'=>$data]);
-
+       $data = DB::table('validemails')->where('clientid','=',$enrollno)->orderBy('id', 'DESC')->get();
+        return view('valids',['mail'=>$data]);
     }else{
         return redirect('/');
     }
    }
+
+  
+
+   public function deletevalidAll(){
+    Validemails::truncate();
+    
+    $visitormail = session()->get('visitormail');
+    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+    ->first()->enrollno;
+    $mails = Validemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    return view('valids',['mail'=>$mails]);
+   }
+
+
+  // valid email section   
 
    public function invalids(){
     $visitormail = session()->get('visitormail');
@@ -107,11 +120,13 @@ class emailFilterController extends Controller
    }
 
    public function deleteInvalid(Request $request){
-    //  echo "<pre>";
-    //  print_r($request->all());
     $request->validate([ 'emailid' => 'required' ]);
     $emailid = $request['emailid'];
-    $email = Invalidemails::where('id','=',$emailid)->get();
+    $visitormail = session()->get('visitormail');
+    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+    ->first()->enrollno;
+    $email = Invalidemails::where('id','=',$emailid)->where('clientid','=',$clientID)
+    ->get();
     return view('delete/singleDeleteInvalid',['email'=>$email]);
     }
 
@@ -120,24 +135,24 @@ class emailFilterController extends Controller
     //  print_r($request->all());
     $request->validate([ 'mailid' => 'required' ]);
     $id = $request['mailid'];
-    Invalidemails::where('id','=',$id)->delete();
-    
-
     $visitormail = session()->get('visitormail');
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
+    Invalidemails::where('id','=',$id)->where('clientid','=',$clientID)->delete();
     $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
     return view('invalids',['mail'=>$mails]);
     }
 
     public function deleteInvalidAll(){
-        Invalidemails::truncate();
-    
-    $visitormail = session()->get('visitormail');
-    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
-    ->first()->enrollno;
+        $visitormail = session()->get('visitormail');
+        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+        ->first()->enrollno;
+
+        Invalidemails::where('clientid','=',$clientID)->truncate();
+
     $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
     return view('invalids',['mail'=>$mails]);
     }
 
+  
 }
