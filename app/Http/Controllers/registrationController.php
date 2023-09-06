@@ -72,8 +72,7 @@ class registrationController extends Controller
    }
 
    public function login(Request $request){
-    // echo "<pre>";
-    // print_r($request->all());
+   
     $request->validate([
         'uemail'=>'required',
         'upass'=>'required'
@@ -82,22 +81,23 @@ class registrationController extends Controller
     $email = $request['uemail'];
     $pass = $request['upass'];
 
+    $num = Visitors::where('email','=',$email)->get()->count();
+
     // connecting to mysql db
-    $host="localhost";
-    $user=env('DB_USERNAME');
-    $dbpass=env('DB_PASSWORD');
-    $db=env('DB_DATABASE');
+    $host = "localhost";
+    $user = env('DB_USERNAME');
+    $dbpass = env('DB_PASSWORD');
+    $db = env('DB_DATABASE');
     $conn = mysqli_connect($host,$user,$dbpass,$db);
 
-    // filtering user inputs
     $email = htmlspecialchars($email);
     $email = mysqli_real_escape_string($conn,$email);
     $pass = htmlspecialchars($pass);
     $pass = mysqli_real_escape_string($conn,$pass);
 
-    $num = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
-    if($num == 1){
+    
 
+    if($num == 1){
         $hashedPassword = Visitors::select('passwd')->where('email','=',$email)
     ->first()->passwd;
 
