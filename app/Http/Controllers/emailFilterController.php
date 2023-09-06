@@ -79,7 +79,7 @@ class emailFilterController extends Controller
         $visitormail = session()->get('visitormail');
         $enrollno = Visitors::select('enrollno')->where('email','=',$visitormail)
             ->first()->enrollno;
-       $data = DB::table('validemails')->where('clientid','=',$enrollno)->orderBy('id', 'DESC')->get();
+       $data = DB::table('validemails')->where('clientid','=',$enrollno)->get();
         return view('valids',['mail'=>$data]);
     }else{
         return redirect('/');
@@ -95,7 +95,7 @@ class emailFilterController extends Controller
     $visitormail = session()->get('visitormail');
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
-    $mails = Validemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    $mails = Validemails::where('clientid','=',$clientID)->get();
     return view('valids',['mail'=>$mails]);
    }
 
@@ -117,7 +117,7 @@ class emailFilterController extends Controller
         $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
         ->first()->enrollno;
         Validemails::where('id','=',$id)->where('clientid','=',$clientID)->delete();
-        $mails = Validemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+        $mails = Validemails::where('clientid','=',$clientID)->get();
         return view('valids',['mail'=>$mails]);
     }
 
@@ -129,7 +129,7 @@ class emailFilterController extends Controller
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
 
-    $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    $mails = Invalidemails::where('clientid','=',$clientID)->get();
     
     return view('invalids',['mail'=>$mails]);
    }
@@ -154,7 +154,7 @@ class emailFilterController extends Controller
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
     Invalidemails::where('id','=',$id)->where('clientid','=',$clientID)->delete();
-    $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    $mails = Invalidemails::where('clientid','=',$clientID)->get();
     return view('invalids',['mail'=>$mails]);
     }
 
@@ -165,7 +165,7 @@ class emailFilterController extends Controller
 
         Invalidemails::where('clientid','=',$clientID)->truncate();
 
-    $mails = Invalidemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    $mails = Invalidemails::where('clientid','=',$clientID)->get();
     return view('invalids',['mail'=>$mails]);
     }
 

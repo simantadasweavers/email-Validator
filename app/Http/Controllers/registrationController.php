@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Visitors;
 use DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Allemails;
+use App\Models\Validemails;
+use App\Models\Invalidemails;
 
 class registrationController extends Controller
 {
@@ -103,6 +106,34 @@ class registrationController extends Controller
     }
     else{
         return redirect('/');
+    }
+   }
+
+   public function logout(){
+    if(session('visitormail')){
+        session()->forget('visitormail');
+        session()->flush();
+
+        return redirect('/');
+    }else{
+        return view('login');
+    }
+   }
+
+   public function dashboard(){
+    if(session('visitormail')){
+        $visitormail = session()->get('visitormail');
+        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
+        
+       $allemails = Allemails::where('clientid','=',$clientID)->get()->count();
+       $validemails = Validemails::where('clientid','=',$clientID)->get()->count();
+       $invaidemails = Invalidemails::where('clientid','=',$clientID)->get()->count();
+    
+       $all = Allemails::where('clientid','=',$clientID)->get();
+
+       return view('dashboard',['all'=>$all,'allemail'=>$allemails,'valid'=>$validemails,'invalid'=>$invaidemails]);
+    }else{
+        return view('login');
     }
    }
 

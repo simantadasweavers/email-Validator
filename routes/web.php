@@ -13,15 +13,11 @@ Route::get('/', function () {
         return view('login');
     }
 });
-Route::get('/dashboard',function(){
-    if(session('visitormail')){
-        return view('dashboard');
-    }else{
-        return redirect('/');
-    }
-});
+Route::get('/dashboard',[registrationController::class,'dashboard']);
+
 Route::post('/registration',[registrationController::class,'save']);
 Route::post('/login',[registrationController::class,'login']);
+Route::get('/user_logout',[registrationController::class,'logout']);
 
 Route::get('/filter',function(){
     if(session('visitormail')){
