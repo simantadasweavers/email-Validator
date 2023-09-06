@@ -89,7 +89,7 @@ class emailFilterController extends Controller
    public function deletevalidAll(){
     $visitormail = session()->get('visitormail');
     $enrollno = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
-    Validemails::where('clientid','=',$enrollno)->truncate();
+    Validemails::where('clientid','=',$enrollno)->delete();
     $visitormail = session()->get('visitormail');
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
@@ -144,8 +144,6 @@ class emailFilterController extends Controller
     }
 
     public function deleteInvalidReq(Request $request){
-    //  echo "<pre>";
-    //  print_r($request->all());
     $request->validate([ 'mailid' => 'required' ]);
     $id = $request['mailid'];
     $visitormail = session()->get('visitormail');
@@ -161,7 +159,7 @@ class emailFilterController extends Controller
         $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
         ->first()->enrollno;
 
-        Invalidemails::where('clientid','=',$clientID)->truncate();
+        Invalidemails::where('clientid','=',$clientID)->delete();
 
     $mails = Invalidemails::where('clientid','=',$clientID)->get();
     return view('invalids',['mail'=>$mails]);
@@ -172,7 +170,7 @@ class emailFilterController extends Controller
         $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
         ->first()->enrollno;
 
-        Allemails::where('clientid','=',$clientID)->truncate();
+        Allemails::where('clientid','=',$clientID)->delete();
 
         $visitormail = session()->get('visitormail');
         $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
