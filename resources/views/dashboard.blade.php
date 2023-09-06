@@ -270,7 +270,7 @@
         <table class="table">
   <thead>
     <tr>
-      <th scope="col">Enroll No</th>
+      <!-- <th scope="col">Enroll No</th> -->
       <th scope="col">Email</th>
       <th scope="col">Submitted At</th>
     </tr>
@@ -278,7 +278,7 @@
   <tbody>
     @foreach($all as $all)
     <tr>
-      <th scope="row">{{$all->emailid}}</th>
+      <!-- <th scope="row">{{$all->emailid}}</th> -->
       <td>{{$all->name}}</td>
       <td>{{$all->date}}</td>
     </tr>

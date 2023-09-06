@@ -20,7 +20,7 @@
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">Enroll No</th>
+      <!-- <th scope="col">Enroll No</th> -->
       <th scope="col">Email</th>
       <th scope="col">Created At</th>
     </tr>
@@ -28,7 +28,7 @@
   <tbody>
   @foreach($mail as $mail) 
   <tr>
-      <th scope="row">{{$mail->id}}</th>
+      <!-- <th scope="row">{{$mail->id}}</th> -->
       <td>{{$mail->name}}</td>
       <td>{{$mail->created_at}}</td>
     </tr>

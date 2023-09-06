@@ -12,7 +12,7 @@ class ExportAllEmails implements FromCollection, WithHeadings {
 
    public function headings(): array {
     return [
-        "ENROLL NO",
+        // "ENROLL NO",
         "EMAIL",
          "SUBMITTED AT"
        ];
@@ -23,7 +23,8 @@ class ExportAllEmails implements FromCollection, WithHeadings {
     
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
-    $usersData = Allemails::select('emailid','name','date')->where('clientid','=',$clientID)->get();
+    // $usersData = Allemails::select('emailid','name','date')->where('clientid','=',$clientID)->get();
+    $usersData = Allemails::select('name','date')->where('clientid','=',$clientID)->get();
    return collect($usersData);
    }
 

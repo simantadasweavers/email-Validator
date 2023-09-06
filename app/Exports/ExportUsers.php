@@ -16,7 +16,7 @@ class ExportUsers implements FromCollection, WithHeadings {
 
    public function headings(): array {
     return [
-        "ENROLL NO",
+        // "ENROLL NO",
         "EMAIL",
          "SUBMITTED AT"
        ];
@@ -27,7 +27,8 @@ class ExportUsers implements FromCollection, WithHeadings {
     
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
-    $usersData = Invalidemails::select('id','name','date')->where('clientid','=',$clientID)->get();
+    // $usersData = Invalidemails::select('id','name','date')->where('clientid','=',$clientID)->get();
+    $usersData = Invalidemails::select('name','date')->where('clientid','=',$clientID)->get();
    return collect($usersData);
    }
 

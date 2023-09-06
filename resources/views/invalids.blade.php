@@ -237,7 +237,7 @@
         <table class="table">
   <thead>
     <tr>
-      <th scope="col">Enroll No</th>
+      <!-- <th scope="col">Enroll No</th> -->
       <th scope="col">Email</th>
       <th scope="col">Submission Date</th>
       <th scope="col">Action</th>
@@ -247,7 +247,7 @@
    
   @foreach($mail as $mail)
     <tr>
-      <th scope="row">{{$mail->id}}</th>
+      <!-- <th scope="row">{{$mail->id}}</th> -->
       <td>{{$mail->name}}</td>
       <td>{{$mail->created_at}}</td>
       <td> <form action="{{url('/')}}/deleteInvalidEmail" method="POST"> @csrf <input type="hidden" name="emailid" value="{{$mail->id}}" required> <button class="btn btn-warning" style="color:black;" type="submit">Delete</button> </form> </td>
