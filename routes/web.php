@@ -14,7 +14,6 @@ Route::get('/', function () {
     }
 });
 Route::get('/dashboard',[registrationController::class,'dashboard']);
-
 Route::post('/registration',[registrationController::class,'save']);
 Route::post('/login',[registrationController::class,'login']);
 Route::get('/user_logout',[registrationController::class,'logout']);
@@ -28,6 +27,11 @@ Route::get('/filter',function(){
 });
 
 Route::post('/emailvalidate',[emailFilterController::class,'filter'])->name('checkemail');
+
+
+Route::get('/allmailspdf',[PDFController::class,'allEmailsGeneratePDF']);
+Route::get('/allmailsxlsx',[ExcelController::class,'exportAllEmails']);
+Route::get('/deleteAllEmails',[emailFilterController::class,'deleteAllEmails']);
 
 Route::get('/validemails',[emailFilterController::class,'validemails']);
 Route::get('/deletevalidEmailAll',[emailFilterController::class,'deletevalidAll']);

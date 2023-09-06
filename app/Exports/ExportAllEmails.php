@@ -1,18 +1,14 @@
 <?php
 
   namespace App\Exports;
-
   use DB;
-
   use Maatwebsite\Excel\Concerns\FromCollection;
-
   use Maatwebsite\Excel\Concerns\WithHeadings;
-
-  use App\Models\Invalidemails;
+  use App\Models\Allemails;
   use App\Models\Visitors;
 
 
-class ExportUsers implements FromCollection, WithHeadings {
+class ExportAllEmails implements FromCollection, WithHeadings {
 
    public function headings(): array {
     return [
@@ -27,7 +23,7 @@ class ExportUsers implements FromCollection, WithHeadings {
     
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
-    $usersData = Invalidemails::select('id','name','date')->where('clientid','=',$clientID)->get();
+    $usersData = Allemails::select('emailid','name','date')->where('clientid','=',$clientID)->get();
    return collect($usersData);
    }
 

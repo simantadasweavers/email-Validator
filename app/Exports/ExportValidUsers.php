@@ -23,7 +23,7 @@ class ExportValidUsers implements FromCollection, WithHeadings {
     
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
-    $usersData = Validemails::select('id','name','date')->where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+    $usersData = Validemails::select('id','name','date')->where('clientid','=',$clientID)->get();
    return collect($usersData);
    }
 

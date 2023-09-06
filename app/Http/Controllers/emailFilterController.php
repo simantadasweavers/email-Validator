@@ -21,7 +21,6 @@ use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
 class emailFilterController extends Controller
 {
    public function filter(Request $request){
-
     $visitormail = session()->get('visitormail');
     $enrollno = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
@@ -86,7 +85,6 @@ class emailFilterController extends Controller
     }
    }
 
-  
 
    public function deletevalidAll(){
     $visitormail = session()->get('visitormail');
@@ -167,6 +165,24 @@ class emailFilterController extends Controller
 
     $mails = Invalidemails::where('clientid','=',$clientID)->get();
     return view('invalids',['mail'=>$mails]);
+    }
+
+    public function deleteAllEmails(){
+        $visitormail = session()->get('visitormail');
+        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+        ->first()->enrollno;
+
+        Allemails::where('clientid','=',$clientID)->truncate();
+
+        $visitormail = session()->get('visitormail');
+        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
+        
+       $allemails = Allemails::where('clientid','=',$clientID)->orderBy('emailid', 'DESC')->get()->count();
+       $validemails = Validemails::where('clientid','=',$clientID)->orderBy('id', 'DESC')->get()->count();
+       $invaidemails = Invalidemails::where('clientid','=',$clientID)->orderBy('id', 'DESC')->get()->count();
+        $all = Allemails::where('clientid','=',$clientID)->orderBy('emailid','DESC')->get();
+        return view('dashboard',['all'=>$all,'allemail'=>$allemails,'valid'=>$validemails,'invalid'=>$invaidemails]);
+     
     }
 
   

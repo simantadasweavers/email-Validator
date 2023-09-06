@@ -125,11 +125,11 @@ class registrationController extends Controller
         $visitormail = session()->get('visitormail');
         $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
         
-       $allemails = Allemails::where('clientid','=',$clientID)->get()->count();
-       $validemails = Validemails::where('clientid','=',$clientID)->get()->count();
-       $invaidemails = Invalidemails::where('clientid','=',$clientID)->get()->count();
+       $allemails = Allemails::where('clientid','=',$clientID)->orderBy('emailid', 'DESC')->get()->count();
+       $validemails = Validemails::where('clientid','=',$clientID)->orderBy('id', 'DESC')->get()->count();
+       $invaidemails = Invalidemails::where('clientid','=',$clientID)->orderBy('id', 'DESC')->get()->count();
     
-       $all = Allemails::where('clientid','=',$clientID)->get();
+       $all = Allemails::where('clientid','=',$clientID)->orderBy('emailid','DESC')->get();
 
        return view('dashboard',['all'=>$all,'allemail'=>$allemails,'valid'=>$validemails,'invalid'=>$invaidemails]);
     }else{
