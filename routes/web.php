@@ -36,6 +36,9 @@ Route::post('/emailvalidate',[emailFilterController::class,'filter'])->name('che
 Route::get('/validemails',[emailFilterController::class,'validemails']);
 Route::get('/deletevalidEmailAll',[emailFilterController::class,'deletevalidAll']);
 Route::get('/validmailspdf',[PDFController::class,'validmailsGeneratePDF']);
+Route::post('/deletevalidEmail',[emailFilterController::class,'deleteValid']);
+Route::post('/deletevalidEmail_req',[emailFilterController::class,'deleteValidReq']);
+Route::get('/validmailsxls',[ExcelController::class,'exportValidUsersData']);
 
 Route::get('/invalids',[emailFilterController::class,'invalids']);
 Route::get('/invalidmailspdf',[PDFController::class,'generatePDF']);

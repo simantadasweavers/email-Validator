@@ -48,10 +48,7 @@ class emailFilterController extends Controller
         date_default_timezone_set("Asia/Kolkata");
         $all->time = date("h:i:sa");
         $all->save();
-
-
     if($res){
-
         $valid = new Validemails;
         $valid->clientid = $enrollno;
         $valid->name = $email;
@@ -59,12 +56,9 @@ class emailFilterController extends Controller
         date_default_timezone_set("Asia/Kolkata");
         $valid->time = date("h:i:sa");
         $valid->save();
-
         echo "<b>".$email."</b>"."<font color='green'> VALID EMAIL </font> <br>";
-
     }
     else{
-
         $invalid = new Invalidemails;
         $invalid->clientid = $enrollno;
         $invalid->name = $email;
@@ -72,15 +66,13 @@ class emailFilterController extends Controller
         date_default_timezone_set("Asia/Kolkata");
         $invalid->time = date("h:i:sa");
         $invalid->save();
-
         echo "<b>".$email."</b>"."<font color='red'> INVALID EMAIL </font> <br>";
-
     }
     }
     }
    }
 
-//    valid email section
+    // valid email section
 
    public function validemails(Request $request){
     if(session('visitormail')){
@@ -97,14 +89,37 @@ class emailFilterController extends Controller
   
 
    public function deletevalidAll(){
-    Validemails::truncate();
-    
+    $visitormail = session()->get('visitormail');
+    $enrollno = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
+    Validemails::where('clientid','=',$enrollno)->truncate();
     $visitormail = session()->get('visitormail');
     $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
     ->first()->enrollno;
     $mails = Validemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
     return view('valids',['mail'=>$mails]);
    }
+
+   public function deleteValid(Request $request){
+    $request->validate([ 'emailid' => 'required' ]);
+    $emailid = $request['emailid'];
+    $visitormail = session()->get('visitormail');
+    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+    ->first()->enrollno;
+    $email = Validemails::where('id','=',$emailid)->where('clientid','=',$clientID)
+    ->get();
+    return view('delete/singleDeletevalid',['email'=>$email]);
+    }
+
+    public function deleteValidReq(Request $request){
+        $request->validate([ 'mailid' => 'required' ]);
+        $id = $request['mailid'];
+        $visitormail = session()->get('visitormail');
+        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+        ->first()->enrollno;
+        Validemails::where('id','=',$id)->where('clientid','=',$clientID)->delete();
+        $mails = Validemails::where('clientid','=',$clientID)->orderBy('id','DESC')->get();
+        return view('valids',['mail'=>$mails]);
+    }
 
 
   // valid email section   

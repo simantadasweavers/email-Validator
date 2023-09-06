@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Valid Mails Lists</title>
+  <title>Single Email Delete</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/email.jpeg" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
 </head>
@@ -48,62 +48,29 @@
         <div class="col-1"></div>
         <div class="col-10">
 
-        <br>
-        <br>
-        <br>
-        <br>
-
-        <table class="table">
-  <thead>
-    <tr>
-      
-    <th scope="col">
-        <a href="{{url('/')}}/validmailspdf">
-        <button class="btn btn-success">Export PDF</button>
-        </a>
-      </th>
-    
-      <th scope="col">
-        <a href="{{url('/')}}/validmailsxls">
-        <button class="btn btn-dark">Export XLS</button>
-        </a>
-      </th>
-    
-
-      <th scope="col">
-      <a href="{{url('/')}}/deletevalidEmailAll">
-      <button class="btn btn-danger">Trash All</button>
-      </a>  
-      </th>
-    </tr>
-  </thead>
-</table>
-
-<br>
-
-
-        <!-- invalid emails lists -->
         <table class="table">
   <thead>
     <tr>
       <th scope="col">Enroll No</th>
       <th scope="col">Email</th>
-      <th scope="col">Submission Date</th>
+      <th scope="col">Created At</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-   
-  @foreach($mail as $mail)
-    <tr>
-      <th scope="row">{{$mail->id}}</th>
-      <td>{{$mail->name}}</td>
-      <td>{{$mail->created_at}}</td>
-      <td> <form action="{{url('/')}}/deletevalidEmail" method="POST"> @csrf <input type="hidden" name="emailid" value="{{$mail->id}}" required> <button class="btn btn-warning" style="color:black;" type="submit">Delete</button> </form> </td>
-    </tr>
-   @endforeach
 
-  </tbody>
+  <font>hello</font>
+
+  @foreach($email as $email)
+    <tr>
+      <th scope="row">{{$email->id}}</th>
+      <td colspan="2">{{$email->name}}</td>
+      <td>{{$email->date}}</td>
+      <td> <form action="{{url('/')}}/deletevalidEmail_req" method="POST"> @csrf <input type="hidden" name="mailid" value="{{$email->id}}" required> <button class="btn btn-danger" type="submit">Delete</button> </form> </td>
+    </tr>
+    @endforeach
+
+</tbody>
 </table>
 
         </div>
@@ -123,3 +90,5 @@
 </body>
 
 </html>
+
+
