@@ -2,8 +2,9 @@
 <!doctype html>
 <html lang="en">
 
-<head id="head">
+<script src="jquery.js"></script>
 
+<head id="head">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
 
   <meta charset="utf-8">
@@ -11,7 +12,6 @@
   <title>Emails filter page ~ Email Validator</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/email.jpeg" />
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
-  <script src="jquery.js"></script>
 </head>
 
 
@@ -72,13 +72,9 @@
     <!-- show result -->
     <div class="row">
       <p id="totalEmails" class="text-center fs-4"></p>
-
       <br>
-
       <p class="text-center" style="color:#F00000;font-size:20px;" id="waitMsg">Plz wait and don't page reload!!</p>
-  
       <br>
-
     <div class="col">
     <table class="table">
   <thead>
@@ -93,9 +89,29 @@
   </tbody>
 </table>
     </div>
-
     <br>
   </div>
+
+
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-4">
+      <a href="{{url('/')}}/validemails">
+      <button class="btn btn-success" type="button" id="validBtn" style="color:black;">Go to Valid Email's</button>
+      </a>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-4">
+      <a href="{{url('/')}}/invalids">
+      <button class="btn btn-warning" type="button" id="InvalidBtn" style="color:black;">Go to In-Valid Email's</button>
+      </a>
+    </div>
+    <div class="col-1"></div>
+  <br>
+  <br>  
+  </div>
+
+
 
   </div>
 
@@ -116,8 +132,10 @@ var allEmail=0;
     $(document).ready(function() {
 
       $('#head').hide();
-
       $('#waitMsg').hide();
+      $('#validBtn').hide();
+      $('#InvalidBtn').hide();
+      
 
   $('#extractButton').click(function() {
     var textareaValue = $('#emailTextarea').val(); // Get the value of the textarea
@@ -174,6 +192,10 @@ function myFunction(item,index){
 
                   if(sessionStorage.getItem('allEmailSubmitNumber') == totalEmailCount){
                     alert("ALL EMAIL PROPERLY FILTERED !!");
+
+                    $('#validBtn').show();
+                    $('#InvalidBtn').show();
+
                   }
 
                 }
@@ -186,6 +208,10 @@ function myFunction(item,index){
 
                   if(sessionStorage.getItem('allEmailSubmitNumber') == totalEmailCount){
                     alert("ALL EMAIL PROPERLY FILTERED !!");
+
+                    $('#validBtn').show();
+                    $('#InvalidBtn').show();
+                    
                   }
 
                 }
