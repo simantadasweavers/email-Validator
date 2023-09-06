@@ -8,7 +8,7 @@ use App\Http\Controllers\ExcelController;
 
 Route::get('/', function () {
     if(session('visitormail')){
-        return view('dashboard');
+        return redirect('/dashboard');
     }else{
         return view('login');
     }

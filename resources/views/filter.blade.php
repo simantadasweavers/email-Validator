@@ -2,7 +2,10 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+<head id="head">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Emails filter page ~ Email Validator</title>
@@ -112,6 +115,8 @@ var allEmail=0;
 <script>
     $(document).ready(function() {
 
+      $('#head').hide();
+
       $('#waitMsg').hide();
 
   $('#extractButton').click(function() {
@@ -126,6 +131,8 @@ var allEmail=0;
     document.getElementById("totalEmails").innerHTML = "<b>Total Emails Number: </b>"+allEmail; 
     $('#extractEmailForm').hide();
     $('#waitMsg').show();
+    $('#head').show();
+      
     emails.forEach(myFunction);
 });
 });

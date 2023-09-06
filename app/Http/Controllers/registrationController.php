@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Visitors;
-use DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Allemails;
 use App\Models\Validemails;
@@ -121,15 +121,15 @@ class registrationController extends Controller
    }
 
    public function dashboard(){
-    if(session('visitormail')){
+    if(session()->get('visitormail')){
         $visitormail = session()->get('visitormail');
         $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
-        
-       $allemails = Allemails::where('clientid','=',$clientID)->orderBy('emailid', 'DESC')->get()->count();
-       $validemails = Validemails::where('clientid','=',$clientID)->orderBy('id', 'DESC')->get()->count();
-       $invaidemails = Invalidemails::where('clientid','=',$clientID)->orderBy('id', 'DESC')->get()->count();
+
+        $allemails = Allemails::where('clientid','=',$clientID)->get()->count();
+         $validemails = Validemails::where('clientid','=',$clientID)->get()->count();
+         $invaidemails = Invalidemails::where('clientid','=',$clientID)->get()->count();
     
-       $all = Allemails::where('clientid','=',$clientID)->orderBy('emailid','DESC')->get();
+        $all = Allemails::where('clientid','=',$clientID)->orderBy('emailid','DESC')->get();
 
        return view('dashboard',['all'=>$all,'allemail'=>$allemails,'valid'=>$validemails,'invalid'=>$invaidemails]);
     }else{
@@ -138,3 +138,5 @@ class registrationController extends Controller
    }
 
 }
+
+
