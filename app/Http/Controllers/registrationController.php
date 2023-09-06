@@ -95,8 +95,10 @@ class registrationController extends Controller
     $pass = htmlspecialchars($pass);
     $pass = mysqli_real_escape_string($conn,$pass);
 
+    $num = Visitors::select('enrollno')->where('email','=',$visitormail)->first()->enrollno;
+    if($num == 1){
 
-    $hashedPassword = Visitors::select('passwd')->where('email','=',$email)
+        $hashedPassword = Visitors::select('passwd')->where('email','=',$email)
     ->first()->passwd;
 
     if (Hash::check($pass, $hashedPassword))
@@ -107,6 +109,12 @@ class registrationController extends Controller
     else{
         return redirect('/');
     }
+    
+    }
+    else{
+        return "EMAIL NOT EXISTS!!";
+    }
+
    }
 
    public function logout(){
