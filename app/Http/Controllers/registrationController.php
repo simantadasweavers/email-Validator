@@ -51,7 +51,10 @@ class registrationController extends Controller
     if($pass1 == $pass2){
         $visitor = new Visitors;
 
-        // saving record
+        $num = Visitors::where('email','=',$email)->get()->count();
+
+        if($num == 0){
+             // saving record
         $visitor->name = $name;
         $visitor->phone = $phone;
         $visitor->email = $email;
@@ -61,10 +64,13 @@ class registrationController extends Controller
         $visitor->time = date("h:i:sa");
         $visitor->loc = $_SERVER['REMOTE_ADDR'];
         $visitor->save();
-
         session(['visitormail' => $email]);
-
         return redirect('/dashboard');
+        }
+        else{
+            return "EMAIL ADDRESS ALREADY EXIST!! TRY ANOHER ONE!";
+        }
+
     }
     else{
         return "Your Both Passwords Not Matched!";
