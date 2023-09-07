@@ -19,13 +19,15 @@ class ExportValidUsers implements FromCollection, WithHeadings {
     }
 
    public function collection(){
-    $visitormail = session()->get('visitormail');
-    
-    $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
-    ->first()->enrollno;
-    // $usersData = Validemails::select('id','name','date')->where('clientid','=',$clientID)->get();
-    $usersData = Validemails::select('name','date')->where('clientid','=',$clientID)->get();
-    return collect($usersData);
+    if(session()->get('visitormail')){
+      $visitormail = session()->get('visitormail'); 
+      $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+      ->first()->enrollno;
+      $usersData = Validemails::select('name','date')->where('clientid','=',$clientID)->get();
+      return collect($usersData);
+    }else{
+    return redirect('/');
+    }
    }
 
 }
