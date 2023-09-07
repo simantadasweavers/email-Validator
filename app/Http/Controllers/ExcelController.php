@@ -11,17 +11,29 @@ use App\Exports\ExportAllEmails;
 class ExcelController extends Controller
 {
     public function exportUsersData(){
-        $fileName = 'invalid_users.xlsx';
+        if(session()->get('visitormail')){
+            $fileName = 'invalid_users.xlsx';
         return Excel::download(new ExportUsers, $fileName);
+        }else{
+        return redirect('/');
+        }
     }
 
     public function exportValidUsersData(){
-        $fileName = 'valid_users.xlsx';
+        if(session()->get('visitormail')){
+            $fileName = 'valid_users.xlsx';
         return Excel::download(new ExportValidUsers, $fileName);
+        }else{
+        return redirect('/');
+        }
     }
 
     public function exportAllEmails(){
-        $fileName = 'all_emails.xlsx';
+        if(session()->get('visitormail')){
+            $fileName = 'all_emails.xlsx';
         return Excel::download(new ExportAllEmails, $fileName);
+        }else{
+        return redirect('/');
+        }
     }
 }
