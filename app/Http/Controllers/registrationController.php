@@ -54,7 +54,11 @@ class registrationController extends Controller
         $num = Visitors::where('email','=',$email)->get()->count();
 
         if($num == 0){
-             // saving record
+
+            $num = Visitors::where('phone','=',$phone)->get()->count();
+
+            if($num == 0){
+        // saving record
         $visitor->name = $name;
         $visitor->phone = $phone;
         $visitor->email = $email;
@@ -66,6 +70,11 @@ class registrationController extends Controller
         $visitor->save();
         session(['visitormail' => $email]);
         return redirect('/dashboard');
+            }
+            else{
+                return "PHONE NUMBER ALREADY EXIST!! TRY ANOTHER ONE!!";
+            }
+
         }
         else{
             return "EMAIL ADDRESS ALREADY EXIST!! TRY ANOHER ONE!";
