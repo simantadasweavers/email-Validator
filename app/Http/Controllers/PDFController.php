@@ -13,54 +13,54 @@ class PDFController extends Controller
 {
     public function generatePDF()
     {
-        $data = [
-            'title' => 'Welcome to microcodes.in',
-            'date' => date('m/d/Y')
-        ];
-
-        $visitormail = session()->get('visitormail');
-    
-        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
-        ->first()->enrollno;
-
-        $mails = Invalidemails::where('clientid','=',$clientID)->get();
-    
-      $pdf = PDF::loadView('pdfs/invalid',['mail'=>$mails]);
-    
-     return $pdf->download('invalidmails.pdf');
+        if(session()->get('visitormail')){
+            $data = [
+                'title' => 'Welcome to microcodes.in',
+                'date' => date('m/d/Y')
+            ];
+            $visitormail = session()->get('visitormail');
+            $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+            ->first()->enrollno;
+            $mails = Invalidemails::where('clientid','=',$clientID)->get();
+          $pdf = PDF::loadView('pdfs/invalid',['mail'=>$mails]);
+         return $pdf->download('invalidmails.pdf');
+        }else{
+        return redirect('/');
+        }
     }
 
     public function validmailsGeneratePDF(){
-        $data = [
-            'title' => 'Welcome to microcodes.in',
-            'date' => date('m/d/Y')
-        ];
-
-        $visitormail = session()->get('visitormail');
-    
-        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
-        ->first()->enrollno;
-
-        $mails = Validemails::where('clientid','=',$clientID)->get();
-    
-      $pdf = PDF::loadView('pdfs/valid',['mail'=>$mails]);
-    
-     return $pdf->download('validmails.pdf');
+        if(session()->get('visitormail')){
+            $data = [
+                'title' => 'Welcome to microcodes.in',
+                'date' => date('m/d/Y')
+            ];
+            $visitormail = session()->get('visitormail');
+            $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+            ->first()->enrollno;
+            $mails = Validemails::where('clientid','=',$clientID)->get();
+          $pdf = PDF::loadView('pdfs/valid',['mail'=>$mails]);
+         return $pdf->download('validmails.pdf');
+        }else{
+        return redirect('/');
+        }
     }
 
     public function allEmailsGeneratePDF(){
-        $data = [
-            'title' => 'Welcome to microcodes.in',
-            'date' => date('m/d/Y')
-        ];
-        $visitormail = session()->get('visitormail');
-    
-        $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
-        ->first()->enrollno;
-        $mails = Allemails::where('clientid','=',$clientID)->get();
-        $pdf = PDF::loadView('pdfs/allmails',['mail'=>$mails]);
-    
-         return $pdf->download('allmails.pdf');
+        if(session()->get('visitormail')){
+            $data = [
+                'title' => 'Welcome to microcodes.in',
+                'date' => date('m/d/Y')
+            ];
+            $visitormail = session()->get('visitormail');
+            $clientID = Visitors::select('enrollno')->where('email','=',$visitormail)
+            ->first()->enrollno;
+            $mails = Allemails::where('clientid','=',$clientID)->get();
+            $pdf = PDF::loadView('pdfs/allmails',['mail'=>$mails]);
+             return $pdf->download('allmails.pdf');
+        }else{
+        return redirect('/');
+        }
     }
 
 }
