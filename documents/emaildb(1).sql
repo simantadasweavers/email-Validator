@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2023 at 10:10 AM
--- Server version: 8.0.33-0ubuntu0.22.04.4
--- PHP Version: 8.0.29
+-- Generation Time: Sep 07, 2023 at 11:53 AM
+-- Server version: 8.0.34-0ubuntu0.22.04.1
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `emailvalidatordb`
+-- Database: `emaildb`
 --
 
 -- --------------------------------------------------------
@@ -36,6 +36,10 @@ CREATE TABLE `allemails` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `allemails`
+--
 
 -- --------------------------------------------------------
 
@@ -69,6 +73,9 @@ CREATE TABLE `invalidemails` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `invalidemails`
+--
 -- --------------------------------------------------------
 
 --
@@ -160,6 +167,9 @@ CREATE TABLE `validemails` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `validemails`
+--
 -- --------------------------------------------------------
 
 --
@@ -178,6 +188,10 @@ CREATE TABLE `visitors` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitors`
+--
 
 --
 -- Indexes for dumped tables
@@ -252,7 +266,7 @@ ALTER TABLE `visitors`
 -- AUTO_INCREMENT for table `allemails`
 --
 ALTER TABLE `allemails`
-  MODIFY `emailid` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `emailid` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -264,13 +278,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `invalidemails`
 --
 ALTER TABLE `invalidemails`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -288,13 +302,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `validemails`
 --
 ALTER TABLE `validemails`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `enrollno` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `enrollno` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables
