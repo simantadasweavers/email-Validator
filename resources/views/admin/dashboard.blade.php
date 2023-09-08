@@ -132,11 +132,11 @@ tr:nth-child(even){background-color: #f2f2f2}
                 <button type="button" class="pdf">PDF</button>
                 </a>
             </th>
+          
             <th>
-                <button type="button" class="excel">Excel</button>
-            </th>
-            <th>
-                <button type="button" class="csv">CSV</button>
+               <a href="{{url('/')}}/admin_csv_export">
+               <button type="button" onclick="exportTasks(event.target);" class="csv">CSV</button>
+               </a> 
             </th>
         </tr>
     </table>
@@ -163,4 +163,13 @@ tr:nth-child(even){background-color: #f2f2f2}
 </div>
 
 </body>
+
+<script>
+   function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
+
+
 </html>

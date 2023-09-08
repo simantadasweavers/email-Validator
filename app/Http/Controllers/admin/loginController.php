@@ -9,7 +9,12 @@ use App\Models\Admins;
 class loginController extends Controller
 {
     function redirect(){
-        return view('admin/login');
+        if(session()->get('adminMail')){
+            return redirect('/admindashboard');
+        }
+        else{
+            return view('admin/login');
+        }
     }
 
     function login(Request $request){
