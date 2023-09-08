@@ -57,21 +57,108 @@ div.content {
     float: none;
   }
 }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+
+.pdf{
+  background-color:green;
+  color:white;
+  padding:15px;
+  font-size:20px;
+}
+.excel{
+  background-color:blue;
+  color:white;
+  padding:15px;
+  font-size:20px;
+}
+.csv{
+  background-color:black;
+  color:white;
+  padding:15px;
+  font-size:20px;
+}
 </style>
+
 </head>
 <body>
 
 <div class="sidebar">
   <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
+  <!-- <a href="#news">News</a>
+  <a href="#contact">Contact</a> -->
+  <a href="#about">Logout</a>
 </div>
 
 <div class="content">
   <h2>Welcome Admin</h2>
-  
-  <p>content area</p>
+ 
+  <p>
+  <div style="overflow-x:auto;">
+  <table>
+    <tr>
+    <th>Users</th>
+      <th>All Emails</th>
+      <th>Valids</th>
+      <th>Invalids</th>
+    </tr>
+    <tr>
+        <td>{{$visitor}}</td>
+        <td style="color:blue;">{{$all}}</td>
+        <td style="color:green;">{{$valid}}</td>
+        <td style="color:red;">{{$invalid}}</td>
+    </tr> 
+  </table>
+</div>
+  </p>
+
+  <br>
+  <div style="overflow-x:auto;">
+    <table>
+        <tr>
+            <th>
+                <a href="{{url('/')}}/admin_pdf_export">
+                <button type="button" class="pdf">PDF</button>
+                </a>
+            </th>
+            <th>
+                <button type="button" class="excel">Excel</button>
+            </th>
+            <th>
+                <button type="button" class="csv">CSV</button>
+            </th>
+        </tr>
+    </table>
+  </div>
+  <br>
+
+  <p>
+  <div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Valids</th>
+    </tr>
+    @foreach($mail as $mail)
+    <tr>
+        <td>{{$mail->name}}</td>
+        <td>{{$mail->updated_at}}</td>
+    </tr> 
+    @endforeach
+  </table>
+</div>
+  </p>
 
 </div>
 

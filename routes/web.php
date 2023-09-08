@@ -9,7 +9,7 @@ use App\Http\Controllers\ExcelController;
 // admin routes
 use App\Http\Controllers\admin\loginController;
 use App\Http\Controllers\admin\dashboardController;
-
+use App\Http\Controllers\admin\pdfControllelr;
 
 Route::get('/', function () {
     if(session('visitormail')){
@@ -57,3 +57,4 @@ Route::get('/deleteInvalidEmailAll',[emailFilterController::class,'deleteInvalid
 Route::get('/admin',[loginController::class,'redirect']);
 Route::post('/admin_login',[loginController::class,'login']);
 Route::get('/admindashboard',[dashboardController::class,'gateway']);
+Route::get('/admin_pdf_export',[pdfControllelr::class,'generatePDF']);
