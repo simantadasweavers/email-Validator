@@ -6,6 +6,11 @@ use App\Http\Controllers\emailFilterController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ExcelController;
 
+// admin routes
+use App\Http\Controllers\admin\loginController;
+use App\Http\Controllers\admin\dashboardController;
+
+
 Route::get('/', function () {
     if(session('visitormail')){
         return redirect('/dashboard');
@@ -47,3 +52,8 @@ Route::post('/deleteInvalidEmail',[emailFilterController::class,'deleteInvalid']
 Route::post('/deleteInvalidEmail_req',[emailFilterController::class,'deleteInvalidReq']);
 Route::get('/deleteInvalidEmailAll',[emailFilterController::class,'deleteInvalidAll']);
 
+
+// admin routes
+Route::get('/admin',[loginController::class,'redirect']);
+Route::post('/admin_login',[loginController::class,'login']);
+Route::get('/admindashboard',[dashboardController::class,'gateway']);
