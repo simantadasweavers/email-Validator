@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE admins MODIFY COLUMN adminid bigint(10)");
+        DB::statement("ALTER TABLE admins MODIFY COLUMN adminid bigint(10) AUTO_INCREMENT,AUTO_INCREMENT=1");
         DB::statement("ALTER TABLE admins MODIFY COLUMN adminname varchar(200) NOT NULL");
         DB::statement("ALTER TABLE admins MODIFY COLUMN adminpass varchar(250) NOT NULL");
     }

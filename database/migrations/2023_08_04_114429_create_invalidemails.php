@@ -19,6 +19,14 @@ return new class extends Migration
                 $table->string('time');
                 $table->timestamps();
         });
+        
+        DB::statement("ALTER TABLE invalidemails MODIFY COLUMN id bigint(20) AUTO_INCREMENT,AUTO_INCREMENT=1");
+        DB::statement("ALTER TABLE invalidemails MODIFY COLUMN clientid bigint(20) NOT NULL");
+        DB::statement("ALTER TABLE invalidemails ADD FOREIGN KEY (clientid) REFERENCES visitors(enrollno)");
+        DB::statement("ALTER TABLE invalidemails MODIFY COLUMN name varchar(250) NOT NULL");
+        DB::statement("ALTER TABLE invalidemails MODIFY COLUMN date date NOT NULL");
+        DB::statement("ALTER TABLE invalidemails MODIFY COLUMN time varchar(100) NOT NULL");
+        
     }
 
     /**

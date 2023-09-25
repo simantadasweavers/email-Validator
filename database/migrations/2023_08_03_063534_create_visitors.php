@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('visitors', function (Blueprint $table) {
-            $table->id('enrollno');
+            $table->id('enrollno')->unsigned(false);
             $table->string('name');
             $table->integer('phone');
             $table->string('email');
@@ -22,6 +22,16 @@ return new class extends Migration
             $table->string('loc');
             $table->timestamps();
         });
+        
+        // modifty script
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN enrollno bigint(20) AUTO_INCREMENT,AUTO_INCREMENT=1");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN name varchar(250) NOT NULL");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN phone bigint(15) NOT NULL");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN email varchar(250) NOT NULL");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN passwd varchar(250) NOT NULL");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN date date NOT NULL");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN time varchar(100) NOT NULL");
+        DB::statement("ALTER TABLE visitors MODIFY COLUMN loc varchar(100) NOT NULL");
     }
 
     /**
