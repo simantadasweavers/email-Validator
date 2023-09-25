@@ -24,7 +24,7 @@ return new class extends Migration
         DB::statement("ALTER TABLE allemails MODIFY COLUMN emailid bigint(20) AUTO_INCREMENT,AUTO_INCREMENT=1");
         DB::statement("ALTER TABLE allemails MODIFY COLUMN clientid bigint(20) NOT NULL");
         DB::statement("ALTER TABLE allemails ADD FOREIGN KEY(clientid) REFERENCES visitors(enrollno)");
-        DB::statement("ALTER TABLE allemails MODIFY COLUMN name varchar(20) NOT NULL");
+        DB::statement("ALTER TABLE allemails MODIFY COLUMN name varchar(255) NOT NULL");
         DB::statement("ALTER TABLE allemails MODIFY COLUMN date date NOT NULL");
         DB::statement("ALTER TABLE allemails MODIFY COLUMN time varchar(200) NOT NULL");
         
